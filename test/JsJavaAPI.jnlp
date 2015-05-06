@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://localhost/JsJavaApi2/" href="test/JsJavaAPI.jnlp">
+	<!-- http://docs.oracle.com/javase/7/docs/technotes/guides/javaws/developersguide/syntax.html -->
+	<information>
+		<title>JsJavaAPI</title>
+		<vendor>Bernardo Silva</vendor>
+		<icon href="images/icon.png"/>
+	</information>
+	<application-desc name="JsJavaAPI" main-class="Main"></application-desc>
+	<update check="always"/>
+	<security>
+		<all-permissions/>
+	</security>
+	<resources>
+		<j2se version="1.7+" href="http://java.sun.com/products/autodl/j2se"/>
+		<jar href="build/JsJavaAPI.jar" main="true" />
+	</resources>
+	<!--
+	<resources os="Windows" arch="x86">
+		<nativelib href="swt-native-win32-windows-x86.jar" />
+		<jar href="swt-win32-windows-x86.jar" />
+	</resources>
+
+	<resources os="Windows" arch="x86_64">
+		<nativelib href="swt-native-win32-windows-x86_64.jar" />
+		<jar href="swt-win32-windows-x86_64.jar" />
+	</resources>  
+  -->
+</jnlp>

@@ -1,0 +1,5 @@
+/bin
+/test/node_modules
+/certificado/*.p12
+/certificado/*.crl
+/certificado/*.crt

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project JsJavaApi2 with libraries in sub-folder">
+	<!--ANT 1.7 is required -->
+	<target name="create_run_jar">
+
+		<property name="jar.file" value="${basedir}/build/JsJavaAPI.jar"/>
+
+		<jar destfile="${jar.file}" index="true" filesetmanifest="mergewithoutmain">
+			
+			<manifest>
+				<attribute name="Main-Class" value="Main"/>
+				<attribute name="Class-Path" value="."/>
+				<attribute name="Application-Name" value="JsJavaAPI"/>
+				<attribute name="Permissions" value="all-permissions"/>
+			</manifest>
+			
+            <fileset dir="${basedir}/bin"/>
+            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-http-9.2.10.v20150310.jar"/>
+            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-io-9.2.10.v20150310.jar"/>
+            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-security-9.2.10.v20150310.jar"/>
+            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-server-9.2.10.v20150310.jar"/>
+            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-servlet-9.2.10.v20150310.jar"/>
+            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-util-9.2.10.v20150310.jar"/>
+            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/servlet-api-3.1.jar"/>
+            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/websocket-api-9.2.10.v20150310.jar"/>
+            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/websocket-client-9.2.10.v20150310.jar"/>
+            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/websocket-common-9.2.10.v20150310.jar"/>
+            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/websocket-server-9.2.10.v20150310.jar"/>
+            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/websocket-servlet-9.2.10.v20150310.jar"/>
+		</jar>
+		
+		<signjar
+			jar="${jar.file}"
+			storetype="PKCS12"
+			keystore="${basedir}/certificado/jsjavaapi.p12"
+			alias="1"
+			storepass="senha"
+			tsaurl="http://tsa.starfieldtech.com"
+		/>
+		
+	</target>
+</project>

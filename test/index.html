@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>JsJavaAPI test</title>
+<script src="node_modules/q/q.js"></script>
+<script type="text/javascript" src="JsJavaAPI.js"></script>
+</head>
+<body>
+
+	Os resultados serão mostrados no console.<br />
+
+	<button onclick="getPrinters()">getPrinters</button>
+	<button onclick="print()">print</button> <br />
+
+	<button onclick="selectDirectory()">selectDirectory</button>
+	<button onclick="filePutContents()">filePutContents</button>
+
+ 	<script src="//www.java.com/js/deployJava.js"></script>
+    <script>
+        var dir = location.href.substring(0, location.href.lastIndexOf('/')+1);
+        var url = dir + "JsJavaAPI.jnlp";
+        deployJava.createWebStartLaunchButton(url, '1.7.0');
+    </script>
+
+
+
+	<script type="text/javascript">
+
+		if (!JsJavaAPI.init())
+			alert('Seu navegador não tem suporte a websockets');
+	
+		function getPrinters(){
+			JsJavaAPI.connect().then(function(){
+				
+				JsJavaAPI.exec("getPrinters").then(function(ret){
+					console.log('impressoras:', ret.printers);
+				}, function(error){
+					console.log('Erro ao coletar a relação de impressoras', error);
+				});
+				
+			}, function(error){
+				console.log('Erro ao conectar');
+			});			
+		}
+		
+		function print(){
+			JsJavaAPI.connect().then(function(){
+				
+				JsJavaAPI.exec("print", {
+					documentTitle: "Descrição do arquivo",
+					content: "Conteúdo do arquivo",
+					printer: ""
+				}).then(function(){
+					console.log('Impressão realizada com sucesso');
+				}, function(error){
+					console.log('Não foi possível imprimir', error);
+				});	
+				
+			}, function(error){
+				console.log('Erro ao conectar');
+			});			
+		}
+	
+		function filePutContents(){
+			JsJavaAPI.connect().then(function(){
+				
+				JsJavaAPI.exec("filePutContents", {
+					title: "Título do arquivo",
+					path: "",
+					fileName: "teste.txt",
+					content: "conteúdo do arquivo"
+				}).then(function(){
+					console.log('Arquivo salvo com sucesso');
+				}, function(error){
+					console.log('Não foi possível salvar o arquivo', error);
+				});
+				
+			}, function(error){
+				console.log('Erro ao conectar');
+			});			
+		}
+	
+		function selectDirectory(){
+			JsJavaAPI.connect().then(function(){
+				
+				JsJavaAPI.exec("selectDirectory", {
+					title: "Selecione um diretório",
+				}).then(function(ret){
+					console.log('Diretório selecionado', ret);
+				}, function(error){
+					console.log('Não foi possível selecionar um diretório', error);
+				});
+				
+			}, function(error){
+				console.log('Erro ao conectar');
+			});			
+		}
+
+    </script>
+</body>
+</html>
