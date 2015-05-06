@@ -13,10 +13,10 @@ var JsJavaAPI = (function(){
 		},
 		
 		connect: function(){
-			var deferred = Q.defer();
+			var deferred = jQuery.Deferred();
 			if (ws != null){
 				deferred.resolve();
-				return deferred.promise;
+				return deferred.promise();
 			}
 			
 			ws = new WebSocket("ws://localhost:1206/jja");
@@ -36,11 +36,11 @@ var JsJavaAPI = (function(){
 				}catch(ex){
 				}
 			};
-	        return deferred.promise;
+	        return deferred.promise();
 		},
 		
 		exec: function(method, params){
-			var deferred = Q.defer();
+			var deferred = jQuery.Deferred();
 			
 			if (!ws){
 				callback.reject();
@@ -72,7 +72,7 @@ var JsJavaAPI = (function(){
 				}));
 			}
 			
-			return deferred.promise;			
+			return deferred.promise();			
 		}
 	};
 	
