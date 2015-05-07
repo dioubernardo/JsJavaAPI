@@ -3,40 +3,39 @@
 	<!--ANT 1.7 is required -->
 	<target name="create_run_jar">
 
-		<property name="jar.file" value="${basedir}/build/JsJavaAPI.jar"/>
+		<property name="jar.server" value="${basedir}/build/JsJavaAPI-server.jar" />
+		<property name="jar.start" value="${basedir}/build/JsJavaAPI.jar" />
 
-		<jar destfile="${jar.file}" index="true" filesetmanifest="mergewithoutmain">
-			
+		<jar destfile="${jar.start}">
 			<manifest>
-				<attribute name="Main-Class" value="Main"/>
-				<attribute name="Class-Path" value="."/>
-				<attribute name="Application-Name" value="JsJavaAPI"/>
-				<attribute name="Permissions" value="all-permissions"/>
+				<attribute name="Main-Class" value="Start" />
+				<attribute name="Class-Path" value="." />
+				<attribute name="Permissions" value="all-permissions" />
 			</manifest>
-			
-            <fileset dir="${basedir}/bin"/>
-            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-http-9.2.10.v20150310.jar"/>
-            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-io-9.2.10.v20150310.jar"/>
-            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-security-9.2.10.v20150310.jar"/>
-            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-server-9.2.10.v20150310.jar"/>
-            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-servlet-9.2.10.v20150310.jar"/>
-            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-util-9.2.10.v20150310.jar"/>
-            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/servlet-api-3.1.jar"/>
-            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/websocket-api-9.2.10.v20150310.jar"/>
-            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/websocket-client-9.2.10.v20150310.jar"/>
-            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/websocket-common-9.2.10.v20150310.jar"/>
-            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/websocket-server-9.2.10.v20150310.jar"/>
-            <zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/websocket-servlet-9.2.10.v20150310.jar"/>
+			<fileset file="${basedir}/bin/Start.class" />
 		</jar>
-		
-		<signjar
-			jar="${jar.file}"
-			storetype="PKCS12"
-			keystore="${basedir}/certificado/jsjavaapi.p12"
-			alias="1"
-			storepass="senha"
-			tsaurl="http://tsa.starfieldtech.com"
-		/>
-		
+
+		<jar destfile="${jar.server}" filesetmanifest="mergewithoutmain">
+
+			<manifest>
+				<attribute name="Main-Class" value="Main" />
+				<attribute name="Class-Path" value="." />
+				<attribute name="Permissions" value="all-permissions" />
+			</manifest>
+
+			<fileset excludes="Start.class" dir="${basedir}/bin" />
+			<zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-http-9.2.10.v20150310.jar" />
+			<zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-io-9.2.10.v20150310.jar" />
+			<zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-security-9.2.10.v20150310.jar" />
+			<zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-server-9.2.10.v20150310.jar" />
+			<zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-servlet-9.2.10.v20150310.jar" />
+			<zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/jetty-util-9.2.10.v20150310.jar" />
+			<zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/servlet-api-3.1.jar" />
+			<zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/websocket-api-9.2.10.v20150310.jar" />
+			<zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/websocket-client-9.2.10.v20150310.jar" />
+			<zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/websocket-common-9.2.10.v20150310.jar" />
+			<zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/websocket-server-9.2.10.v20150310.jar" />
+			<zipfileset excludes="META-INF/*.SF about.html" src="${basedir}/libs/websocket-servlet-9.2.10.v20150310.jar" />
+		</jar>
 	</target>
 </project>
